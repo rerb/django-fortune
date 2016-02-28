@@ -3,11 +3,14 @@ python:
 - '2.7'
 - '3.4'
 - '3.5'
+before_install:
+  - pip install codecov
 install:
 - python setup.py install
 - pip install -r requirements_test.txt
 script: coverage run runtests.py
-after_success: coveralls
+after_success:
+  - codecov
 notifications:
   slack:
     secure: FpA+WKCIokNL3pIlPBC8Y3nTZWb6KPWt2WuwPvlDM/u+vyMYr2Lt5ynWcvT9VZK8YTnLD7xbfWny2XeRWwQNhfYQGe2PEbi6LTz+bjOy+6a/a0z2kGQC0OYE6IWLBE3hBfepiADNgOaUrbQ1hp4Dvp4g7lFYDbAlTZanWiUVl0qyqzmQVSvTyazJCdSaXPBApouSgbaN7ye9ECAgA2Z7DCzIav3/BljocbGys/TI1w/HU52ldKHSQR6tg5yAWMP6uqbIbfPapkk4dFeKjGzngaNjcPSbLuu8JCPKM+vVmnt4nOoqtCaJDjw8/dKLsEX83GybfpOqWeHmvW83h204FzLhgRspsh0WOZMv277mwkgKiqhFUKn7eGRwLSpMOO6nlaniGjUe2dJpSncEL16f0HSZ+TVQzrgpgoxAazw2GxUoGpffq/sYW/k8vGJaYjfulM4l0MmHwrtURNbR9aWKSq+9MfBULlZNNY/eIu2GavC+ivuMqrqiTPdsjxHfIpqzRAR5IBAeR5tM1q27hvrd1/YEPHQIXSRSsjUIiVQbp4tjlWAkfX4R6+iW12AkYdfv1rYryKertYL10X+7cUgNovVHFzqGPUOq/qpZ0LR2bYU9vZHQ5k8moRFsxHul+tkjCLJSnihKpqg0EUwrC3+0RJWjRuWVD6n+pWannQubDeY=
