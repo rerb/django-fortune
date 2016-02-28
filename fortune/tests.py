@@ -8,7 +8,7 @@ from .models import (Fortune,
                      filename_to_pack_name)
 
 
-class TestFilenameToPackNameTestCase(TestCase):
+class FilenameToPackNameTestCase(TestCase):
 
     def test_long_path(self):
         """Does filename_to_pack_name handle a long path?"""
@@ -17,11 +17,11 @@ class TestFilenameToPackNameTestCase(TestCase):
                          filename_to_pack_name(full_path))
 
 
-class TestPackTestCase(TestCase):
+class PackTestCase(TestCase):
 
-    fortunes = ["Good luck for you.",
+    fortunes = ["Good luck for everybody.",
                 "Good luck for me.",
-                "Good luck for everybody."]
+                "Good luck for you."]
     pack_data = "\n%\n".join(fortunes) + "\n%\n"
 
     def test_load(self):
@@ -88,10 +88,10 @@ class TestPackTestCase(TestCase):
         finally:
             pack_file.close()
             os.remove(pack_file.name)
-        self.assertItemsEqual(self.pack_data, lines)
+        self.assertEqual(self.pack_data, lines)
 
 
-class TestFortuneTestCase(TestCase):
+class FortuneTestCase(TestCase):
 
     def setUp(self):
         self.pack = Pack.objects.create(name="fortunes")
