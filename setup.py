@@ -1,6 +1,13 @@
+#!/usr/bin/env python
+
 import os
 from setuptools import find_packages, setup
+import sys
 
+install_requires = ["django>=1.6"]
+
+if sys.version_info[0] == 2:
+    install_requires.append("pathlib2")
 
 setup(name="django-fortune",
       version="0.1",
@@ -13,7 +20,7 @@ setup(name="django-fortune",
       license="GPL3",
       keywords="django fortune",
       url="https://github.com/rerb/django-fortune",
-      install_requires=["django>=1.3"],
+      install_requires=install_requires,
       test_suite='runtests.runtests',
       classifiers=[
           "Environment :: Web Environment",
