@@ -1,0 +1,13 @@
+language: python
+python:
+- '2.7'
+- '3.4'
+- '3.5'
+install:
+- setup.py install
+- pip install -r requirements_test.txt
+script: coverage run runtests.py
+after_success: coveralls
+# notifications:
+#  hipchat: 5534a6204d6caa1a45ac2444282aca@WebDevActivity
+#  email: false
