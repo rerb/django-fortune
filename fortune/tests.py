@@ -88,7 +88,7 @@ class TestPackTestCase(TestCase):
         finally:
             pack_file.close()
             os.remove(pack_file.name)
-        self.assertEqual(self.pack_data, lines)
+        self.assertItemsEqual(self.pack_data, lines)
 
 
 class TestFortuneTestCase(TestCase):
