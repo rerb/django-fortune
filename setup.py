@@ -1,19 +1,29 @@
 #!/usr/bin/env python
-
-import os
 from setuptools import find_packages, setup
 import sys
+
+import pypandoc
+
 
 install_requires = ["django>=1.6"]
 
 if sys.version_info[0] == 2:
     install_requires.append("pathlib2")
 
+try:
+    long_description = pypandoc.convert("README.md", "rst")
+    long_description = long_description.replace("\r", "")
+except OSError:
+    print("Pandoc not found. Long_description conversion failure.")
+    import io
+    # pandoc is not installed, fallback to using raw contents
+    with io.open("README.md", encoding="utf-8") as f:
+        long_description = f.read()
+
 setup(name="django-fortune",
       version="1.0b",
       description="A Django template-tag for fortunes.",
-      long_description=open(os.path.join(os.path.dirname(__file__),
-                                         "README.md")).read(),
+      long_description=long_description,
       packages=find_packages(),
       author="Robert Erb",
       author_email="bob.erb@gmail.com",
