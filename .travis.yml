@@ -6,8 +6,9 @@ python:
 before_install:
   - pip install codecov
 install:
-- python setup.py install
-- pip install -r requirements_test.txt
+  - python setup.py install
+  - pip install -r requirements_test.txt
+  - pip install -r requirements_dev.txt
 script: coverage run runtests.py
 after_success:
   - codecov
