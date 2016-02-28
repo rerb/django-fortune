@@ -10,7 +10,7 @@ if sys.version_info[0] == 2:
     install_requires.append("pathlib2")
 
 setup(name="django-fortune",
-      version="0.1",
+      version="1.0b",
       description="A Django template-tag for fortunes.",
       long_description=open(os.path.join(os.path.dirname(__file__),
                                          "README.md")).read(),
@@ -32,5 +32,6 @@ setup(name="django-fortune",
           "Programming Language :: Python :: 3",
           "Programming Language :: Python :: 3.4",
           "Programming Language :: Python :: 3.5",
-          "Framework :: Django"
+          "Framework :: Django",
+          "Development Status :: 4 - Beta"
       ])
