@@ -2,8 +2,6 @@
 from setuptools import find_packages, setup
 import sys
 
-import pypandoc
-
 
 install_requires = ["django>=1.6"]
 
@@ -11,9 +9,10 @@ if sys.version_info[0] == 2:
     install_requires.append("pathlib2")
 
 try:
+    import pypandoc
     long_description = pypandoc.convert("README.md", "rst")
     long_description = long_description.replace("\r", "")
-except OSError:
+except ImportError, OSError:
     print("Pandoc not found. Long_description conversion failure.")
     import io
     # pandoc is not installed, fallback to using raw contents
@@ -21,7 +20,7 @@ except OSError:
         long_description = f.read()
 
 setup(name="django-fortune",
-      version="1.0b",
+      version="1.0",
       description="A Django template-tag for fortunes.",
       long_description=long_description,
       packages=find_packages(),
@@ -43,5 +42,5 @@ setup(name="django-fortune",
           "Programming Language :: Python :: 3.4",
           "Programming Language :: Python :: 3.5",
           "Framework :: Django",
-          "Development Status :: 4 - Beta"
+          "Development Status :: 5 - Production/Stable"
       ])
