@@ -12,7 +12,7 @@ try:
     import pypandoc
     long_description = pypandoc.convert("README.md", "rst")
     long_description = long_description.replace("\r", "")
-except ImportError, OSError:
+except (ImportError, OSError):
     print("Pandoc not found. Long_description conversion failure.")
     import io
     # pandoc is not installed, fallback to using raw contents
