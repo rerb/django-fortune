@@ -24,7 +24,7 @@ else:
             long_description = f.read()
 
 setup(name="django-fortune",
-      version="1.0",
+      version="1.0.1",
       description="A Django template-tag for fortunes.",
       long_description=long_description,
       packages=find_packages(),
