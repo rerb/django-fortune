@@ -10,14 +10,18 @@ if sys.version_info[0] == 2:
 
 try:
     import pypandoc
-    long_description = pypandoc.convert("README.md", "rst")
-    long_description = long_description.replace("\r", "")
-except (ImportError, OSError):
-    print("Pandoc not found. Long_description conversion failure.")
-    import io
-    # pandoc is not installed, fallback to using raw contents
-    with io.open("README.md", encoding="utf-8") as f:
-        long_description = f.read()
+except ImportError:
+    print("pypandoc import failed. Long_description conversion failure")
+else:
+    try:
+        long_description = pypandoc.convert("README.md", "rst")
+        long_description = long_description.replace("\r", "")
+    except OSError:
+        print("Pandoc not found. Long_description conversion failure.")
+        import io
+        # pandoc is not installed, fallback to using raw contents
+        with io.open("README.md", encoding="utf-8") as f:
+            long_description = f.read()
 
 setup(name="django-fortune",
       version="1.0",
