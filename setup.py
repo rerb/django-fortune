@@ -3,14 +3,19 @@ from setuptools import find_packages, setup
 import sys
 
 
+def readme():
+    with open('README.rst') as f:
+        return f.read()
+
 install_requires = ["django>=1.6"]
 
 if sys.version_info[0] == 2:
     install_requires.append("pathlib2")
 
 setup(name="django-fortune",
-      version="1.0.5",
+      version="1.0.6",
       description="A Django template-tag for fortunes.",
+      long_description=readme(),
       packages=find_packages(),
       include_package_data=True,
       author="Robert Erb",
