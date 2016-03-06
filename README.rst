@@ -14,6 +14,7 @@ The Template Tag
 
 .. code:: html
 
+    {% load fortune_tags %}
     {% fortune %}
 
 The Management Commands
