@@ -1,2 +1,4 @@
-Django>=1.6
+Django>=1.7
+djangorestframework
+markdown  # For DRF browsable API.
 pathlib2; python_version < "3"

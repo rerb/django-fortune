@@ -48,7 +48,8 @@ class Pack(models.Model):
 class Fortune(models.Model):
 
     text = models.CharField(max_length=2046)
-    pack = models.ForeignKey(Pack, on_delete=models.CASCADE)
+    pack = models.ForeignKey(Pack, on_delete=models.CASCADE,
+                             related_name="fortunes")
 
     class Meta:
         unique_together = ('pack', 'text')

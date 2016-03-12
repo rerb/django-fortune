@@ -7,7 +7,9 @@ def readme():
     with open('README.rst') as f:
         return f.read()
 
-install_requires = ["django>=1.6"]
+install_requires = ["django>=1.7",
+                    "djangorestframework",
+                    "markdown"]
 
 if sys.version_info[0] == 2:
     install_requires.append("pathlib2")

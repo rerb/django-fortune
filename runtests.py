@@ -14,7 +14,8 @@ settings.configure(
                     'django.contrib.contenttypes',
                     'django.contrib.sessions',
                     'django.contrib.sites',
-                    'fortune'],
+                    'fortune',
+                    'rest_framework'],
     MIDDLEWARE_CLASSES=(
         'django.contrib.sessions.middleware.SessionMiddleware',
         'django.middleware.common.CommonMiddleware',
@@ -25,7 +26,23 @@ settings.configure(
     ),
     SITE_ID=1,
     DEBUG=False,
-    ROOT_URLCONF=''
+    ROOT_URLCONF='',
+    REST_FRAMEWORK={
+        # Use Django's standard `django.contrib.auth` permissions,
+        # or allow read-only access for unauthenticated users.
+        'DEFAULT_PERMISSION_CLASSES': [
+            'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        ]
+        'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+        'DEFAULT_THROTTLE_CLASSES': (
+            'rest_framework.throttling.AnonRateThrottle',
+            'rest_framework.throttling.UserRateThrottle'
+        ),
+        'DEFAULT_THROTTLE_RATES': {
+            'anon': '10/minute',
+            'user': '100/minute'
+        }
+    }
 )
 
 
