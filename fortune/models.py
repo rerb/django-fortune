@@ -58,8 +58,13 @@ class Fortune(models.Model):
         return self.text
 
     @classmethod
-    def fortune(cls):
+    def random_fortune(cls):
         fortune = cls.objects.order_by("?").first()
+        return fortune
+
+    @classmethod
+    def fortune(cls):
+        fortune = cls.random_fortune()
         if fortune:
             return fortune.text
         else:
