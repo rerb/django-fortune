@@ -1,5 +1,4 @@
 import os
-import sys
 
 from django.db import models, transaction
 from django.db.utils import IntegrityError
@@ -8,6 +7,10 @@ from django.db.utils import IntegrityError
 def filename_to_pack_name(filename):
     return os.path.splitext(
         os.path.basename(filename))[0].title().replace("_", " ")
+
+
+class PackAlreadyLoadedError(Exception):
+    pass
 
 
 class Pack(models.Model):
@@ -22,26 +25,14 @@ class Pack(models.Model):
             try:
                 pack = cls.objects.create(name=pack_name)
             except IntegrityError:
-                print("Pack named {name} already loaded".format(
-                    name=pack_name))
-                return
+                raise PackAlreadyLoadedError
             with open(pack_filename, 'r') as pack_file:
                 fortunes = pack_file.read()
                 for fortune in [f[:-1] for f in fortunes.split('\n%')]:
                     if fortune:  # No empty fortunes.
                         Fortune.objects.create(text=fortune, pack=pack)
 
-    def unload(self, pack_filename=None):
-        try:
-            if pack_filename:
-                pack_file = open(pack_filename, 'w')
-            else:
-                pack_file = sys.stdout
-            for fortune in Fortune.objects.filter(pack=self):
-                pack_file.write(fortune.text + '\n%\n')
-        finally:
-            if pack_filename:
-                pack_file.close()
+    def unload(self):
         self.delete()
 
 

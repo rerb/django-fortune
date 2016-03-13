@@ -58,8 +58,7 @@ class PackTestCase(TestCase):
         pack = Pack.objects.create(name="Test Pack")
         for fortune in self.fortunes:
             Fortune.objects.create(text=fortune, pack=pack)
-        pack_file = tempfile.NamedTemporaryFile(mode="w")
-        pack.unload(pack_filename=pack_file.name)
+        pack.unload()
         self.assertEqual(0, Pack.objects.count())
 
     def test_unload_removes_fortunes(self):
@@ -67,28 +66,8 @@ class PackTestCase(TestCase):
         pack = Pack.objects.create(name="Test Pack")
         for fortune in self.fortunes:
             Fortune.objects.create(text=fortune, pack=pack)
-        pack_file = tempfile.NamedTemporaryFile(mode="w")
-        pack.unload(pack_filename=pack_file.name)
+        pack.unload()
         self.assertEqual(0, Fortune.objects.count())
-
-    def test_unload_output(self):
-        """When we unload a Pack of Fortunes, are they saved into a file?"""
-        pack = Pack.objects.create(name="Test Pack")
-        for fortune in self.fortunes:
-            Fortune.objects.create(text=fortune, pack=pack)
-        pack_file = tempfile.NamedTemporaryFile(mode="w", delete=False)
-        pack_filename = pack_file.name
-        try:
-            pack.unload(pack_filename=pack_file.name)
-            pack_file.close()
-            pack_file = open(pack_filename, 'r')
-            lines = pack_file.read()
-        except:
-            raise
-        finally:
-            pack_file.close()
-            os.remove(pack_file.name)
-        self.assertEqual(self.pack_data, lines)
 
 
 class FortuneTestCase(TestCase):

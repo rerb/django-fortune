@@ -4,7 +4,7 @@ import sys
 
 from django.core.management.base import BaseCommand
 
-from ...models import Pack
+from ...models import Pack, PackAlreadyLoadedError
 from ...utils import get_available_pack_names, get_fortunes_path
 
 if sys.version_info[0] == 2:
@@ -21,7 +21,7 @@ class Command(BaseCommand):
             Pack.objects.get(name=options["pack_name"])
         except Pack.DoesNotExist:
             pass
-        else:
+        except PackAlreadyLoadedError:
             print(options["pack_name"], " is already loaded")
             return
         fortunes_path = get_fortunes_path()
