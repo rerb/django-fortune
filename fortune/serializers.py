@@ -5,7 +5,7 @@ from .models import Fortune, Pack
 class FortuneSerializer(serializers.HyperlinkedModelSerializer):
     pack = serializers.HyperlinkedRelatedField(
         many=False,
-        view_name="api:pack-detail",
+        view_name="fortune:api:pack-detail",
         read_only=True)
     pack_name = serializers.CharField(max_length=256,
                                       source="pack.name")
@@ -18,7 +18,7 @@ class FortuneSerializer(serializers.HyperlinkedModelSerializer):
 class PackSerializer(serializers.HyperlinkedModelSerializer):
     fortunes = serializers.HyperlinkedRelatedField(
         many=True,
-        view_name="api:fortune-detail",
+        view_name="fortune:api:fortune-detail",
         read_only=True)
 
     class Meta:
