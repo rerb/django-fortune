@@ -2,8 +2,7 @@
 """
 from django.core.management.base import BaseCommand
 
-from ...models import Pack
-from ...utils import get_available_pack_names
+from ...models import Pack, get_available_pack_names
 
 
 class Command(BaseCommand):
