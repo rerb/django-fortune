@@ -15,7 +15,7 @@ if sys.version_info[0] == 2:
     install_requires.append("pathlib2")
 
 setup(name="django-fortune",
-      version="1.0.6",
+      version="1.1.0",
       description="A Django template-tag for fortunes.",
       long_description=readme(),
       packages=find_packages(),
