@@ -8,7 +8,8 @@ class FortuneSerializer(serializers.HyperlinkedModelSerializer):
         view_name="fortune:api:pack-detail",
         read_only=True)
     pack_name = serializers.CharField(max_length=256,
-                                      source="pack.name")
+                                      source="pack.name",
+                                      read_only=True)
 
     class Meta:
         model = Fortune
